@@ -18,7 +18,7 @@ This quick start demonstrates how to interact with the Change Feed API using Azu
 	* [Microsoft Visual Studio](https://www.visualstudio.com).
 	* [Git](http://git-scm.com/).
 
-1. Clone this repository using `git clone https://github.com/Azure-Samples/azure-cosmos-db-cassandra-dotnet-getting-started.git`
+1. Clone this repository using `git clone https://github.com/TheovanKraay/cassandra-change-feed.git`
 
 2. Open the CassandraChangeFeedSample.sln solution and install the Cassandra .NET driver. Use the .NET Driver's NuGet package. From the Package Manager Console window in Visual Studio:
 
