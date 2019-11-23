@@ -4,13 +4,13 @@ languages:
 - csharp
 products:
 - azure
-description: "Azure Cosmos DB is Microsoft's globally distributed multi-model database service"
+description: "Azure Cosmos DB's API for Cassandra - Change Feed Sample"
 urlFragment: azure-cosmos-db-cassandra-dotnet-getting-started
 ---
 
-# Developing a Dotnet app with Cassandra API using Azure Cosmos DB
+# Developing a Dotnet app with Cassandra API using Azure Cosmos DB - using Change Feed
 Azure Cosmos DB is Microsoft's globally distributed multi-model database service. You can quickly create and query document, table, key-value, and graph databases, all of which benefit from the global distribution and horizontal scale capabilities at the core of Azure Cosmos DB. 
-This quick start demonstrates how to create an Azure Cosmos DB account for the Cassandra API by using the Azure portal. You'll then build a user profile console app, output as shown in the following image, with sample data.
+This quick start demonstrates how to interact with the Change Feed API using Azure Cosmos DB's API for Cassandra
 
 ## Running this sample
 * Before you can run this sample, you must have the following perquisites:
@@ -20,7 +20,7 @@ This quick start demonstrates how to create an Azure Cosmos DB account for the C
 
 1. Clone this repository using `git clone https://github.com/Azure-Samples/azure-cosmos-db-cassandra-dotnet-getting-started.git`
 
-2. Open the CassandraQuickStartSample.sln solution and install the Cassandra .NET driver. Use the .NET Driver's NuGet package. From the Package Manager Console window in Visual Studio:
+2. Open the CassandraChangeFeedSample.sln solution and install the Cassandra .NET driver. Use the .NET Driver's NuGet package. From the Package Manager Console window in Visual Studio:
 
 ```bash
 PM> Install-Package CassandraCSharpDriver
@@ -40,7 +40,7 @@ private const string CassandraContactPoint = "<FILLME>"; //  DnsName
 ![User Data](/img.PNG?raw=true "user data")
 
 ## About the code
-The code included in this sample is intended to get you quickly started with a C# application using Cassandra C# driver that connects to Azure Cosmos DB with the Cassandra API.
+The code included in this sample is intended to demonstrate how to interract with the Change Feed API. The sample shows the Change Feed being queried iteratively, using the continuation token, which is returned as part of the PagingState. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same table. Set DataGenerator as the startup project, run it, then open the solution file again. Then, set ChangeFeedSample as the start up project, and run it. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario.
 
 ## More information
 
