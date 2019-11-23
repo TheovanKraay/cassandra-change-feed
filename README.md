@@ -5,7 +5,7 @@ languages:
 products:
 - azure
 description: "Azure Cosmos DB's API for Cassandra - Change Feed Sample"
-urlFragment: azure-cosmos-db-cassandra-dotnet-getting-started
+urlFragment: cassandra-change-feed
 ---
 
 # Using the Change Feed with Azure Cosmos DB's API for Cassandra
