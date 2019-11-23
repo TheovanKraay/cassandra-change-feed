@@ -33,14 +33,18 @@ private const string UserName = "<FILLME>";
 private const string Password = "<FILLME>";
 private const string CassandraContactPoint = "<FILLME>"; //  DnsName
 ```
-4. Compile and Run the project.
+4. Compile the project.
 
-5. Output Image: 
+5. Set DataGenerator as the startup project, run it.
+
+6. While DataGenerator is running, open the solution file again in a new Visual Studio instance. This time set ChangeFeedSample as the start up project, and run it. 
+
+7. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario. 
 
 ![User Data](/img.PNG?raw=true "user data")
 
 ## About the code
-The code included in this sample is intended to demonstrate how to interract with the Change Feed API. The sample shows the Change Feed being queried iteratively, using the continuation token, which is returned as part of the PagingState. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same table. Set DataGenerator as the startup project, run it, then open the solution file again. Then, set ChangeFeedSample as the start up project, and run it. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario.
+The code included in this sample is intended to demonstrate how to interract with the Change Feed using Azure Cosmos DB's API for Cassandra. The sample shows the Change Feed being queried iteratively, using the continuation token, which is returned as part of the PagingState. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same table. 
 
 ## More information
 
