@@ -8,7 +8,7 @@ description: "Azure Cosmos DB's API for Cassandra - Change Feed Sample"
 urlFragment: azure-cosmos-db-cassandra-dotnet-getting-started
 ---
 
-# Developing a Dotnet app with Cassandra API using Azure Cosmos DB - using Change Feed
+# Using the Change Feed with Azure Cosmos DB's API for Cassandra API
 Azure Cosmos DB is Microsoft's globally distributed multi-model database service. You can quickly create and query document, table, key-value, and graph databases, all of which benefit from the global distribution and horizontal scale capabilities at the core of Azure Cosmos DB. 
 This quick start demonstrates how to interact with the Change Feed API using Azure Cosmos DB's API for Cassandra
 
