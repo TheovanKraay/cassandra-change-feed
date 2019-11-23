@@ -41,7 +41,6 @@ private const string CassandraContactPoint = "<FILLME>"; //  DnsName
 
 7. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario. 
 
-![User Data](/img.PNG?raw=true "user data")
 
 ## About the code
 The code included in this sample is intended to demonstrate how to interract with the Change Feed using Azure Cosmos DB's API for Cassandra. The sample shows the Change Feed being queried iteratively, using the continuation token, which is returned as part of the PagingState. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same table. 
