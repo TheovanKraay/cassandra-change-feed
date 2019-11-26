@@ -14,7 +14,6 @@ namespace DataGenerator
         private const string Password = "Password";
         private const string CassandraContactPoint = "CassandraContactPoint";  // DnsName  
         private static int CassandraPort = 10350;
-
         public static void Main(string[] args)
         {
             // Connect to cassandra cluster  (Cassandra API on Azure Cosmos DB supports only TLSv1.2)
@@ -22,13 +21,6 @@ namespace DataGenerator
             options.SetHostNameResolver((ipAddress) => CassandraContactPoint);
             Cluster cluster = Cluster.Builder().WithCredentials(UserName, Password).WithPort(CassandraPort).AddContactPoint(CassandraContactPoint).WithSSL(options).Build();
             ISession session = cluster.Connect();
-
-            //Creating KeySpace and table
-            session.Execute("DROP KEYSPACE IF EXISTS uprofile");
-            session.Execute("CREATE KEYSPACE uprofile WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };");
-            Console.WriteLine(String.Format("created keyspace uprofile"));
-            session.Execute("CREATE TABLE IF NOT EXISTS uprofile.user (user_id int PRIMARY KEY, user_name text, user_bcity text)");
-            Console.WriteLine(String.Format("created table user"));
 
             session = cluster.Connect("uprofile");
             IMapper mapper = new Mapper(session);

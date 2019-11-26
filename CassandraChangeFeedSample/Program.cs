@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using System.Threading;
+using System.Dynamic;
 
 namespace CassandraChangeFeedSample
 {
@@ -32,7 +33,9 @@ namespace CassandraChangeFeedSample
             var options = new Cassandra.SSLOptions(SslProtocols.Tls12, true, ValidateServerCertificate);
             options.SetHostNameResolver((ipAddress) => CassandraContactPoint);
             Cluster cluster = Cluster.Builder().WithCredentials(UserName, Password).WithPort(CassandraPort).AddContactPoint(CassandraContactPoint).WithSSL(options).Build();
+            
             session = cluster.Connect();
+            Setup(); //drop and create keyspace and table
             session = cluster.Connect("uprofile");
             IMapper mapper = new Mapper(session);
 
@@ -57,11 +60,9 @@ namespace CassandraChangeFeedSample
                     Console.WriteLine("getting records from change feed at last page state....");
                     RowSet rowSet = session.Execute(changeFeedQueryStatement);
                     
-
                     //store the continuation token here
                     pageState = rowSet.PagingState;
-
-                    
+                   
                     List<Row> rowList = rowSet.ToList();
                     if (rowList.Count != 0)
                     {
@@ -69,8 +70,14 @@ namespace CassandraChangeFeedSample
                         {
                             string value = rowList[i].GetValue<string>("user_name");
                             int key = rowList[i].GetValue<int>("user_id");
+                            // do something with the data - e.g. compute, forward to another event, function, etc.
+                            // here, we just print the user name field
                             Console.WriteLine("user_name: " + value);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine("zero documents read");
                     }
                     Thread.Sleep(300);
 
@@ -96,5 +103,16 @@ namespace CassandraChangeFeedSample
             return false;
         }
 
+        public void Setup()
+        {
+            //Creating KeySpace and table
+            session.Execute("DROP KEYSPACE IF EXISTS uprofile");
+            session.Execute("CREATE KEYSPACE uprofile WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'datacenter1' : 1 };");
+            Console.WriteLine(String.Format("created keyspace uprofile"));
+            session.Execute("CREATE TABLE IF NOT EXISTS uprofile.user (user_id int PRIMARY KEY, user_name text, user_bcity text)");
+            Console.WriteLine(String.Format("created table user"));
+            //sleep to ensure Keyspace and table written before querying starts
+            Thread.Sleep(2000);
+        }      
     }
 }
