@@ -26,7 +26,7 @@ This quick start demonstrates how to interact with the Change Feed API using Azu
 PM> Install-Package CassandraCSharpDriver
 ```
 
-3. Next, configure the endpoints in **Program.cs**
+3. Next, configure the endpoints in **Program.cs** for both DataGenerator and ChangeFeedSample projects:
 
 ```
 private const string UserName = "<FILLME>"; 
@@ -35,15 +35,15 @@ private const string CassandraContactPoint = "<FILLME>"; //  DnsName
 ```
 4. Compile the project.
 
-5. Set DataGenerator as the startup project, run it.
+5. Set ChangeFeedSample as the startup project, run it. This will create Keyspace and table, and start querying the change feed (initially there will be zero documents returned).
 
-6. While DataGenerator is running, open the solution file again in a new Visual Studio instance. This time set ChangeFeedSample as the start up project, and run it. 
+6. While ChangeFeedSample is running, open the solution file again in a new Visual Studio instance. This time set DataGenerator as the start up project, and run it. 
 
-7. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario. 
+7. Go back to your open run window for ChangeFeedSample. In each iteration, the Change Feed resumes from the last point at which changes were read. This could be used in a streaming or event sourcing scenario. 
 
 
 ## About the code
-The code included in this sample is intended to demonstrate how to interract with the Change Feed using Azure Cosmos DB's API for Cassandra. The sample shows the Change Feed being queried iteratively, using the continuation token, which is returned as part of the PagingState. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same table. 
+The code included in this sample is intended to demonstrate how to interract with the Change Feed using Azure Cosmos DB's API for Cassandra. The sample shows the Change Feed being queried iteratively, using paging state. The idea of the demo is to show the sample running, while another application (DataGenerator) is writing records to the same Cassandra table.
 
 ## More information
 
